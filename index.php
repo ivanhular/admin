@@ -128,7 +128,7 @@
               </tbody>
             </table> -->
 
-            <button type="button" class="btn btn-secondary">Add New</button>
+            <a href="add.php" type="button" class="btn btn-secondary">Add New</a>
 
         </div><!-- /.col -->
 
