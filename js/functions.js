@@ -3,8 +3,8 @@
 $(function(){
 
   var data = {};
-  var keys = Object.keys(glob);
   var glob ={};
+  var keys = Object.keys(glob);
   var modes = [
           "javascript",
           "css",
@@ -13,14 +13,13 @@ $(function(){
           "text/html",
     ];
 
-
-
   var coreSettings = {
     init:function() {
+      // this.initDataTables();
       this.initLoadData();
       this.initAddbtn();
       this.initUpdatebtn();
-      this.initCodeMirror();
+      // this.initCodeMirror();
     },
     initCodeMirror:function () {
 
@@ -78,24 +77,23 @@ $(function(){
         paging: true,
         pageLength: 10,
         ajax:{
-          url:"https://jsonplaceholder.typicode.com/comments",
-             //dataSrc:"",
-
+          data:{action:'load', table_name:'modules'},
+          url:"ajax.php",
+          dataSrc:"",
+          // dataType:'jsonp'
          } ,
         "columns": [
-          { "data": "id"},
-          { "data": "name"},
-          { "data": "email"},
-          { "data": "body"}
+          { "data": "preview_image"},
+          { "data": "module_name"},
+          { "data": "status"},
+          { "data": "canvas_link"}
         ],
 
         });
-
-
     },
     initLoadData:function() {
         jQuery.ajax({
-            data: {action:'load'},
+            data: {action:'load', table_name:'modules'},
             type:'POST',
             //dataType:'json',
             url:'ajax.php',
@@ -105,7 +103,8 @@ $(function(){
 
             },
             success: function(data){
-                console.info(JSON.parse(data));
+                // console.info(JSON.parse(data));
+                console.log(data);
 
             },
             complete:function(){

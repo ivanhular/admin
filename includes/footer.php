@@ -20,4 +20,7 @@
 <script type="text/javascript" src="./plugins/CodeMirror-master/mode/sass/sass.js"></script>
 <script type="text/javascript" src="./plugins/CodeMirror-master/mode/php/php.js"></script>
 
+<script type="text/javascript" src="./plugins/datatables/jquery.dataTables.js"></script>
+<script type="text/javascript" src="./plugins/datatables/dataTables.bootstrap4.js"></script>
+
 <script type="text/javascript" src="./js/functions.js"></script>

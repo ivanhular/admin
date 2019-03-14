@@ -43,7 +43,7 @@
             </div> -->
 
             <!-- Main content -->
-            <div class="invoice p-3 mb-3">
+            <div class="invoice p-3 mb-3" style="display:none;">
             <form>
                 <div class="form-group">
                   <label for="exampleInputEmail1"></label>
@@ -72,11 +72,10 @@
                   <tr>
                     <?php
                     $obj = new module();
-                    $key = get_object_vars($obj);
-
+                    $obj = $obj->get_all_modules();
                     // foreach ($obj->get_all_modules() as $key => $value):?>
                       <?php //echo `<th>$ke</th>`
-                        // var_dump();
+                        var_dump($obj);
 
                       ?>
                     <?php  //endforeach; ?>

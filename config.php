@@ -1,8 +1,8 @@
 <?php
 
-
-require_once(__DIR__.'/vendor/joshcam/mysqli-database-class/MysqliDb.php');
-require_once(__DIR__.'/vendor/joshcam/mysqli-database-class/dbObject.php');
+//
+// require_once(__DIR__.'/vendor/joshcam/mysqli-database-class/MysqliDb.php');
+// require_once(__DIR__.'/vendor/joshcam/mysqli-database-class/dbObject.php');
 
 
  // $db = new MysqliDb (Array (
