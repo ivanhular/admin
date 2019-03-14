@@ -76,11 +76,19 @@ $(function(){
         // serverSide: true,
         paging: true,
         pageLength: 10,
-        "columnDefs": [ {
-         "targets": 7,
-         "data": null,
-         "defaultContent": ' <a></a>'
-         }],
+        order: [[ 1, "asc" ]],
+        "columnDefs": [
+              {
+                  // The `data` parameter refers to the data for the cell (defined by the
+                  // `data` option, which defaults to the column being worked with, in
+                  // this case `data: 0`.
+                  "render": function ( data, type, row ) {
+                      return "<a href=/edit.php?id="+ data +"><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a><a href='' data-toggle='tooltip' title='Delete File'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                  },
+                  "targets": 7
+              },
+              // { "visible": false,  "targets": [ 3 ] }
+        ],
         ajax:{
           data:{action:'load', table_name:'modules'},
           url:"ajax.php",
@@ -96,6 +104,7 @@ $(function(){
           { "data": "description"},
           { "data": "tags"},
           { "data": "template_origin"},
+          { "data": "id"},
 
 
         ],

@@ -2,6 +2,7 @@
 class module extends db{
 
 
+  public $id;
   public $module_name;
   public $status;
   public $canvas_link;
