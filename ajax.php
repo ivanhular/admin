@@ -23,7 +23,7 @@
 
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : "";
 
-class httpRequest extends db {
+class httpRequest extends module {
 
   public $action;
   public $tableName;
@@ -72,14 +72,14 @@ class httpRequest extends db {
   public function load(){
     $data = [];
 
-    $load_request =  $this->find_query("select * from `{$this->tableName}`");
+    $load_request =  $this->find_query("SELECT * from {$this->tableName}");
 
 
     foreach ($load_request as $key => $value) {
       array_push($data, $value);
     }
 
-    var_dump($load_request);
+    echo json_encode($load_request);
 
 
   }

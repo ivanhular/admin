@@ -15,7 +15,7 @@ $(function(){
 
   var coreSettings = {
     init:function() {
-      // this.initDataTables();
+      this.initDataTables();
       this.initLoadData();
       this.initAddbtn();
       this.initUpdatebtn();
@@ -73,20 +73,31 @@ $(function(){
     initDataTables:function () {
       $('#modules_table').DataTable({
         processing: true,
-        serverSide: true,
+        // serverSide: true,
         paging: true,
         pageLength: 10,
+        "columnDefs": [ {
+         "targets": 7,
+         "data": null,
+         "defaultContent": ' <a></a>'
+         }],
         ajax:{
           data:{action:'load', table_name:'modules'},
           url:"ajax.php",
           dataSrc:"",
+          type:'POST',
           // dataType:'jsonp'
          } ,
         "columns": [
           { "data": "preview_image"},
           { "data": "module_name"},
           { "data": "status"},
-          { "data": "canvas_link"}
+          { "data": "canvas_link"},
+          { "data": "description"},
+          { "data": "tags"},
+          { "data": "template_origin"},
+
+
         ],
 
         });

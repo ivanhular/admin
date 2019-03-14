@@ -67,7 +67,7 @@
 
 
           <div class="invoice p-3 mb-3">
-            <table id="modules_table" class="display" style="width:100%">
+            <table id="modules_table" class="table table-striped table-bordered" style="width:100%">
               <thead>
                   <tr>
                     <?php
@@ -75,7 +75,7 @@
                     $obj = $obj->get_all_modules();
                     // foreach ($obj->get_all_modules() as $key => $value):?>
                       <?php //echo `<th>$ke</th>`
-                        var_dump($obj);
+                        // var_dump($obj);
 
                       ?>
                     <?php  //endforeach; ?>
