@@ -14,4 +14,6 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- fancybox -->
   <link href="./node_modules/@fancyapps/fancybox/dist/jquery.fancybox.css" rel="stylesheet">
+  <link href="./plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <link href="./plugins/lity-master/lity-master/dist/lity.css" rel="stylesheet">
 </head>
