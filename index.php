@@ -21,7 +21,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Template Search</h1>
+            <h1>Module Search</h1>
           </div>
           <!-- <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -70,15 +70,6 @@
             <table id="modules_table" class="table table-striped table-bordered" style="width:100%">
               <thead>
                   <tr>
-                    <?php
-                    $obj = new module();
-                    $obj = $obj->get_all_modules();
-                    // foreach ($obj->get_all_modules() as $key => $value):?>
-                      <?php //echo `<th>$ke</th>`
-                        // var_dump($obj);
-
-                      ?>
-                    <?php  //endforeach; ?>
                     <th scope="col">Preview Image</th>
                     <th scope="col">Module Name</th>
                     <th scope="col">Status</th>
@@ -90,43 +81,6 @@
                   </tr>
               </thead>
             </table>
-            <!-- <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Type</th>
-                  <th scope="col">Theme</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <?php
-          // var_dump(get_object_vars($users));
-
-                    //File Loop
-                    // $storage = dbObject::table("storage")->get();
-                //    $storage =  $db->get("storage");
-
-                    //var_dump($storage);
-
-                    // foreach ($storage as $key => $value) {
-                    //     echo '<tr>
-                    //           <td>'. $value['id'] .'</td>
-                    //           <td>'. $value['type'] .'</td>
-                    //           <td>'. $value['theme'] .'</td>
-                    //           <td>
-                    //           <a href="./edit.php?id='. $value['id'] .'" data-toggle="tooltip" data-placement="bottom" title="Edit Source Code"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                    //           <a href="" data-toggle="tooltip" data-placement="bottom" title="Delete File"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                    //           </td>
-                    //           </tr>';
-                    // }
-
-                  ?>
-
-
-              </tbody>
-            </table> -->
 
             <a href="add.php" type="button" class="btn btn-secondary">Add New</a>
 
@@ -143,7 +97,7 @@
     <div class="float-right d-none d-sm-block">
       <b>Version</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2014-2018 <a href="http://adminlte.io"></a>.</strong> All rights
+    <strong>Copyright &copy; 2014-2018 <a href=""></a>.</strong> All rights
     reserved.
   </footer>
 

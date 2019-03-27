@@ -1,27 +1,8 @@
 <?php
   require_once('init.php');
-// if(isset($_REQUEST['type']) || isset($_REQUEST['theme']) || isset($_REQUEST['css']) || isset($_REQUEST['javascript']) || isset($_REQUEST['application/x-httpd-php']) || isset($_REQUEST['sass']) || isset($_REQUEST['text/html']) ){
-//   $data = array (
-//   'module_name' => $_REQUEST['module_name'],
-//   'status' =>  $_REQUEST['status'],
-//   'canvas_link' =>  $_REQUEST['canvas_link'],
-//   'preview_image' =>  $_REQUEST['preview_image'],
-//   'css_code' =>  $_REQUEST['preview_image'],
-//   'javascript_code' =>  $_REQUEST['javascript'],
-//   'php_code' =>  $_REQUEST['application/x-httpd-php'],
-//   'sass_code' =>  $_REQUEST['sass'],
-//   'html_code' =>  $_REQUEST['text/html'],
-//   'description' =>  $_REQUEST['description'],
-//   'tags' =>  $_REQUEST['tags'],
-//   'Template_origin' =>  $_REQUEST['Template_origin'],
-//   'Develop_by' =>  $_REQUEST['Develop_by'],
-//   'date_created' =>  $_REQUEST['date_created'],
-//   'last_edited' =>  $_REQUEST['last_edited'],
-//   );
-// }
-
 
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : "";
+
 
 class httpRequest extends module {
 
@@ -32,65 +13,32 @@ class httpRequest extends module {
       // $this->db = $db;
       // $this->data = $data;
       parent::__construct();
-      $this->action = isset($_REQUEST['action']) ? $_REQUEST['action'] : "";
+      $this->data = isset($_POST) ? $_POST : "";
       $this->tableName = isset($_REQUEST['table_name']) ? $_REQUEST['table_name'] : "";
 
   }
-  // function insert(){
-  //
-  //   $id = $this->db->insert ('storage', $this->data);
-  //
-  //   if($id){
-  //     $response['success'] = "inserted";
-  //   }
-  //   else{
-  //     $response['success'] = 'insert failed: ' . $this->db->getLastError();
-  //   }
-  //   echo  $response['success'];
-  // }
-  //
-  // function update(){
-  //
-  //   $this->db->where ('id', $_REQUEST['id']);
-  //
-  //   if ( $this->db->update ('storage', $this->data)){
-  //     $response['success']  =  $this->db->count . ' records were updated' . 'id ' .$_REQUEST['id'];
-  //   }
-  //   else{
-  //     $response['success']  = 'update failed: ' .  $this->db->getLastError();
-  //   }
-  //   echo  $response['success'];
-  //
-  // }
-  //
-  // function delete(){
-  //   $this->db->where('id',$_REQUEST['id']);
-  //   if($this->db->delete('users')) echo 'successfully deleted';
-  //
-  // }
 
-  public function load(){
-    $data = [];
+  public function insert_module(){
 
-    $load_request =  $this->find_query("SELECT * from {$this->tableName}");
+    var_dump($this->data);
 
-
-    foreach ($load_request as $key => $value) {
-      array_push($data, $value);
+    if( ! $this->module_exits($this->data['module_name'])){
+        $this->add_module($this->data);
+    }else{
+      echo  'Module Name Exist!';
     }
 
-    echo json_encode($load_request);
+  }
 
+
+  public function load_modules(){
+
+      echo json_encode($this->get_all_modules());
 
   }
 
 }
 
-// if($action =="insert" || $action == "update"){
-//   $http = new httpRequest($db,$data);
-// }else{
-//   $http = new httpRequest();
-// }
 $http = new httpRequest();
 
 $http->$action()

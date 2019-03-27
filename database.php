@@ -16,6 +16,24 @@ class db{
     }
   }
 
+  public function insert($data,$table_name){
+
+    $array_keys = implode(",",array_keys($data));
+    $array_values = implode(",",array_values($data));
+
+    // $result = $this->conn->query("insert into `{$table_name}` ( {$array_keys} ) values ( {$array_values} )");
+
+    // $this->confirm_query($result);
+
+     var_dump("insert into `{$table_name}` ( {$array_keys} ) values ( {$array_values} )");
+
+  }
+
+  public function find_in($table_name,$key,$value){
+    $results =  $this->conn->query("SELECT * FROM `{$table_name}` WHERE `{$key}` = '{$value}'") ;
+     return $results->num_rows;
+  }
+
   public function find_query($sql){
     $results =  $this->conn->query($sql) ;
     $this->confirm_query($results);
@@ -35,7 +53,6 @@ class db{
     }
 
     return $obj_list;
-
   }
 
   public function obj_prop($row){

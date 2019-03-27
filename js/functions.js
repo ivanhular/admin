@@ -2,78 +2,109 @@
 
 $(function(){
 
-  var data = {};
-  var glob ={};
-  var keys = Object.keys(glob);
-  var modes = [
-          "javascript",
-          "css",
-          "sass",
-          "application/x-httpd-php",
-          "text/html",
-    ];
-
   var coreSettings = {
+
     init:function() {
+       this.modes = [
+              "javascript",
+              "css",
+              "sass",
+              "application/x-httpd-php",
+              "text/html",
+        ];
+        this.glob ={};
+        this.data ={};
+
       this.initDataTables();
-      this.initLoadData();
+      // this.initLoadData();
+      // this.initUpdatebtn();
+      this.initCodeMirror();
       this.initAddbtn();
-      this.initUpdatebtn();
-      // this.initCodeMirror();
     },
+    // initCodeMirror:function () {
+    //
+    //   var code = [],
+    //       data = {'action':'load'};
+    //
+    //   jQuery.ajax({
+    //       data: data,
+    //       //type:'POST',
+    //       async:false,
+    //       success:function(data){
+    //             code = JSON.parse(data);
+    //       },
+    //       beforeSend:function(){
+    //         //console.log(data);
+    //
+    //       }
+    //   });
+    //
+    //   $('textarea').each(function(index){
+    //
+    //     var id = $(this).attr('id');
+    //     var setMode ="";
+    //
+    //     for (var i = 0; i <= modes.length -1; i++) {
+    //           //var regex = /modes[i]/g
+    //          if(modes[i] == id){
+    //            setMode = modes[i];
+    //
+    //          }
+    //     }
+    //
+    //     glob[id] = CodeMirror.fromTextArea(document.getElementById(id), {
+    //       lineNumbers: true,
+    //       //extraKeys: {"Ctrl-Space": "autocomplete"},
+    //       mode: setMode,
+    //       indentUnit: 4,
+    //       indentWithTabs: true
+    //     });
+    //
+    //     /* get Source Code From server */
+    //     for (var i = 0; i < modes.length -1; i++) {
+    //       if(code[glob[id].options.mode]){ //check Mode
+    //         glob[id].setValue(code[glob[id].options.mode]);
+    //       }
+    //     }
+    //
+    //   });
+    //
+    // },
     initCodeMirror:function () {
 
-      var code = [],
-          data = {'action':'load'};
-
-      jQuery.ajax({
-          data: data,
-          //type:'POST',
-          async:false,
-          success:function(data){
-                code = JSON.parse(data);
-          },
-          beforeSend:function(){
-            //console.log(data);
-
-          }
-      });
+      var modes = this.modes;
+      var glob = this.glob;
 
       $('textarea').each(function(index){
 
         var id = $(this).attr('id');
         var setMode ="";
+         if(id != undefined){
+           for (var i = 0; i <= modes.length -1; i++) {
+                 //var regex = /modes[i]/g
+                if(modes[i] == id){
+                  setMode = modes[i];
+                }
+           }
 
-        for (var i = 0; i <= modes.length -1; i++) {
-              //var regex = /modes[i]/g
-             if(modes[i] == id){
-               setMode = modes[i];
+           glob[id] = CodeMirror.fromTextArea(document.getElementById(id), {
+             lineNumbers: true,
+             //extraKeys: {"Ctrl-Space": "autocomplete"},
+             mode: setMode,
+             indentUnit: 4,
+             indentWithTabs: true
+           });
 
-             }
-        }
+         }
+       });
 
-        glob[id] = CodeMirror.fromTextArea(document.getElementById(id), {
-          lineNumbers: true,
-          //extraKeys: {"Ctrl-Space": "autocomplete"},
-          mode: setMode,
-          indentUnit: 4,
-          indentWithTabs: true
-        });
-
-        /* get Source Code From server */
-        for (var i = 0; i < modes.length -1; i++) {
-          if(code[glob[id].options.mode]){ //check Mode
-            glob[id].setValue(code[glob[id].options.mode]);
-          }
-        }
-
-      });
-
+       this.glob = glob;
     },
     initDataTables:function () {
       $('#modules_table').DataTable({
         processing: true,
         // serverSide: true,
+        autoFill: true,
         paging: true,
         pageLength: 10,
         order: [[ 1, "asc" ]],
@@ -96,10 +127,11 @@ $(function(){
               // { "visible": false,  "targets": [ 3 ] }
         ],
         ajax:{
-          data:{action:'load', table_name:'modules'},
+          data:{action:'load_modules'},
           url:"ajax.php",
           dataSrc:"",
           type:'POST',
+
           // dataType:'jsonp'
          } ,
         "columns": [
@@ -140,44 +172,50 @@ $(function(){
       });
     },
     initAddbtn:function () {
-      $('#add-btn').click(function(){
 
-         for (var i = 0; i <= Object.keys(glob).length -1 ; i++) {
+        var _this = this;
 
-               if(glob[keys[i]] != undefined){
-                 data[keys[i]] = glob[keys[i]].getValue();
-               }
+       $('#add-btn').click(function(){
 
-         }
+         _this.getData();
 
-         data["theme"] = $('#input-theme').val();
-         data["type"] = $('#input-type').val();
-         data["action"] = "insert";
+         _this.data["action"] = "insert_module";
 
          jQuery.ajax({
-             data: data,
+             data: _this.data,
              type:'POST',
              //dataType:'json',
              url:'ajax.php',
              beforeSend:function(){
-
                 toastr.info('Saving...');
 
              },
              success: function(data){
-                 console.info(data);
-
+                 // toastr.remove();
+                 console.log(data);
+                 toastr.warning(data)
              },
-             complete:function(){
-                   toastr.remove();
-                   toastr.success('File Save!');
-             }
+             // complete:function(){
+             //       toastr.remove();
+             //       toastr.success('File Save!');
+             // }
 
          });
-
       });
+
     },
     initUpdatebtn:function () {
+
+      var data = {};
+      var glob ={};
+      var keys = Object.keys(glob);
+      var modes = [
+              "javascript",
+              "css",
+              "sass",
+              "application/x-httpd-php",
+              "text/html",
+        ];
 
 
       $('#update-btn').click(function(){
@@ -202,7 +240,6 @@ $(function(){
              //dataType:'json',
              url:'ajax.php',
              beforeSend:function(){
-
                 toastr.info('Saving...');
 
              },
@@ -219,9 +256,58 @@ $(function(){
 
       });
 
-    }
+    },
+    getData:function(){
+      var keys = Object.keys(this.glob),
+          data = {};
 
+      for (var i = 0; i <= Object.keys(this.glob).length -1 ; i++) {
+
+            if(this.glob[keys[i]] != undefined){
+              data[keys[i]] = this.glob[keys[i]].getValue();
+            }
+
+      }
+
+         data['module_name'] = $('input[name=module_name]').val();
+         data['canvas_link'] = $('input[name=canvas_link]').val();
+         data['preview_image'] = $('input[name=preview_image]').val();
+         data['description'] = $('textarea[name=description]').val();
+         data['tags'] = $('input[name=tags]').val();
+         data['Template_origin'] = $('input[name=Template_origin]').val();
+
+         this.data = data;
+    }
 
   }
   coreSettings.init();
 });
+
+//
+//
+// var glob ={};
+//
+//
+// $('textarea').each(function(index){
+//
+//   var id = $(this).attr('id');
+//   var setMode ="";
+//
+//   for (var i = 0; i <= modes.length -1; i++) {
+//         //var regex = /modes[i]/g
+//        if(modes[i] == id){
+//          setMode = modes[i];
+//
+//        }
+//   }
+//
+//     glob[id] = CodeMirror.fromTextArea(document.getElementById(id), {
+//     lineNumbers: true,
+//     //extraKeys: {"Ctrl-Space": "autocomplete"},
+//     mode: setMode,
+//     indentUnit: 4,
+//     indentWithTabs: true
+//   });
+//
+//
+// });

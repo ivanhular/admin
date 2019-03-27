@@ -20,7 +20,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add New File</h1>
+            <h1>Add Module</h1>
           </div>
 
         </div>
@@ -30,58 +30,65 @@
     <section class="content">
       <div class="container-fluid">
 
-
       <div class="row">
         <div class="col-12">
-
-
           <div class="invoice p-3 mb-3">
             <form>
               <div class="form-group">
-                <label for="input-type">Type</label>
-                <select class="form-control" id="input-type">
-                  <option>Vet</option>
-                  <option>Surgery</option>
-                  <option>real estate</option>
-                </select>
+                <label for="input-type">Module Name</label>
+                <input type="text" class="w-100 form-control" name="module_name" value="module-4" disabled>
               </div>
 
               <div class="form-group">
-                <label for="input-theme">Theme</label>
-                <select class="form-control" id="input-theme">
-                  <option>theme1</option>
-                  <option>theme2</option>
-                  <option>theme3</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="sass">Sass code</label>
-                <textarea class="form-control" id="sass" rows="3"></textarea>
+                <label for="input-type">Canvas link</label>
+                <input type="text" class="w-100 form-control" name="canvas_link" >
               </div>
 
               <div class="form-group">
-                <label for="css">Css code</label>
+                <label for="Template_origin">Template Origin</label>
+                <input type="text" class="w-100 form-control" name="Template_origin" >
+              </div>
+
+              <div class="form-group">
+                <label for="input-type">Preview Image</label>
+                <input type="text" class="w-100 form-control" name="preview_image" >
+              </div>
+
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="description" class="w-100 form-control" rows="8" cols="80"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="tags">Tags</label>
+                <input type="text" class="w-100 form-control" name="tags" >
+              </div>
+
+              <div class="form-group">
+                <label for="css_code">CSS Code</label>
                 <textarea class="form-control" id="css" rows="3"></textarea>
               </div>
 
               <div class="form-group">
-                <label for="javascript">Javascript code</label>
-                <textarea class="form-control" id="javascript" rows="3"></textarea>
+                <label for="sass">SCSS Code</label>
+                <textarea class="form-control" id="sass" rows="3"></textarea>
               </div>
 
               <div class="form-group">
-                <label for="text/html">HTML code</label>
-                <textarea class="form-control" id="text/html" rows="3"></textarea>
+                <label for="javascript_code">Javascript Code</label>
+                <textarea class="form-control" id="javascript_code" rows="3"></textarea>
               </div>
 
+
               <div class="form-group">
-                <label for="text/html">PHP snippet</label>
+                <label for="application/x-httpd-php">PHP Code</label>
                 <textarea class="form-control" id="application/x-httpd-php" rows="3"></textarea>
               </div>
 
+              <div class="form-group">
+                <label for="text/html">HTML Code</label>
+                <textarea class="form-control" id="text/html" rows="3"></textarea>
               </div>
-
-
             </form>
 
             <button id="add-btn" type="button" class="btn btn-secondary">Save</button>
@@ -95,13 +102,13 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer no-print">
+  <!-- <footer class="main-footer no-print">
     <div class="float-right d-none d-sm-block">
       <b>Version</b> 1.0.0
     </div>
     <strong>Copyright &copy; 2014-2018 <a href="http://adminlte.io"></a>.</strong> All rights
     reserved.
-  </footer>
+  </footer> -->
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -113,44 +120,6 @@
 
 <?php include_once(__DIR__."/includes/footer.php") ?>
 </body>
-
-<script type="text/javascript">
-// 
-// var glob ={};
-//
-// var modes = [
-//         "javascript",
-//         "css",
-//         "sass",
-//         "application/x-httpd-php",
-//         "text/html",
-//   ];
-//
-// $('textarea').each(function(index){
-//
-//   var id = $(this).attr('id');
-//   var setMode ="";
-//
-//   for (var i = 0; i <= modes.length -1; i++) {
-//         //var regex = /modes[i]/g
-//        if(modes[i] == id){
-//          setMode = modes[i];
-//
-//        }
-//   }
-//
-//     glob[id] = CodeMirror.fromTextArea(document.getElementById(id), {
-//     lineNumbers: true,
-//     //extraKeys: {"Ctrl-Space": "autocomplete"},
-//     mode: setMode,
-//     indentUnit: 4,
-//     indentWithTabs: true
-//   });
-//
-//
-// });
-
-</script>
 
 </body>
 </html>

@@ -22,6 +22,7 @@
 
 <script type="text/javascript" src="./plugins/datatables/jquery.dataTables.js"></script>
 <script type="text/javascript" src="./plugins/datatables/dataTables.bootstrap4.js"></script>
+<script type="text/javascript" src="./plugins/datatables/extensions/AutoFill/js/dataTables.autoFill.js"></script>
 
 <script type="text/javascript" src="./plugins/lity-master//lity-master/dist/lity.js"></script>
 <script type="text/javascript" src="./js/functions.js"></script>
