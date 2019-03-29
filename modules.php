@@ -34,32 +34,50 @@ class module extends db{
 
   public function module_exits($name){
       $result = $this->find_in($this->table_name , "module_name" , $name);
-
       if($result >= 1){
         return true;
       }
-
   }
 
   public function add_module($data){
-
       unset($data['action']);
+      $change_key = array(
+        "application/x-httpd-php" => "php_code",
+        "text/html"               => "html_code",
+        "css"                     => "css_code",
+        "sass"                    => "sass_code"
+      );
 
       foreach ($data as $key => $value) {
-        var_dump($key);
-        if($key == "application/x-httpd-php"){
+        if(array_key_exists($key,$change_key)){
+            $data[$change_key[$key]] = $value;
             unset($data[$key]);
-            $data["php"] = $value;
-        }
-        if($key == "text/html"){
-            unset($data[$key]);
-            $data["html_code"] = $value;
         }
       }
 
-      $this->insert($data,$this->table_name);
+      if($result = $this->insert($data,$this->table_name))
+        echo "Module Saved!";
   }
 
+  public function set_new_module_count(){
+    $result = $this->find_query("SELECT `module_name` FROM `modules` ORDER BY `date_created` DESC LIMIT 1");
+
+    $pattern = '/(\d+)/m';
+
+    $new_module_name = preg_replace_callback(
+      $pattern,
+      function($matches){
+          return (int)$matches[0][0] + 1;
+      },
+     $result[0]->module_name
+   );
+
+    return $new_module_name;
+  }
+
+  public function get_current_date(){
+    var_dump( date(DATE_ATOM) );
+  }
 
 
 

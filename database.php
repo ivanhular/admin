@@ -19,14 +19,13 @@ class db{
   public function insert($data,$table_name){
 
     $array_keys = implode(",",array_keys($data));
-    $array_values = implode(",",array_values($data));
+    $array_values = implode("', '",array_values($data));
 
-    // $result = $this->conn->query("insert into `{$table_name}` ( {$array_keys} ) values ( {$array_values} )");
+    $result = $this->conn->query("INSERT INTO {$table_name}({$array_keys}) values('{$array_values}')");
 
-    // $this->confirm_query($result);
-
-     var_dump("insert into `{$table_name}` ( {$array_keys} ) values ( {$array_values} )");
-
+    $this->confirm_query($result);
+     // var_dump("INSERT INTO {$table_name}({$array_keys}) values('{$array_values}')");
+     return true;
   }
 
   public function find_in($table_name,$key,$value){

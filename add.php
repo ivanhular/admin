@@ -36,7 +36,7 @@
             <form>
               <div class="form-group">
                 <label for="input-type">Module Name</label>
-                <input type="text" class="w-100 form-control" name="module_name" value="module-4" disabled>
+                <input type="text" class="w-100 form-control" name="module_name" value="module-1" disabled>
               </div>
 
               <div class="form-group">

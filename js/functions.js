@@ -187,18 +187,31 @@ $(function(){
              //dataType:'json',
              url:'ajax.php',
              beforeSend:function(){
+
                 toastr.info('Saving...');
 
              },
              success: function(data){
-                 // toastr.remove();
-                 console.log(data);
-                 toastr.warning(data)
-             },
-             // complete:function(){
-             //       toastr.remove();
-             //       toastr.success('File Save!');
-             // }
+
+                toastr.remove();
+
+                var parseData = JSON.parse(data);
+
+                console.log(parseData);
+
+               if(parseData.message =="Module Saved!"){
+                  toastr.success(parseData.message);
+                }else{
+                  toastr.warning(parseData.message);
+                  setTimeout(function(){
+                    toastr.remove();
+                    toastr.info("System will automatically adjust Module Count");
+
+                    $('input[name=module_name]').val(parseData.new_module_name);
+
+                  },2000);
+                }
+              },
 
          });
       });
@@ -262,11 +275,9 @@ $(function(){
           data = {};
 
       for (var i = 0; i <= Object.keys(this.glob).length -1 ; i++) {
-
             if(this.glob[keys[i]] != undefined){
               data[keys[i]] = this.glob[keys[i]].getValue();
             }
-
       }
 
          data['module_name'] = $('input[name=module_name]').val();
