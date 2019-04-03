@@ -28,6 +28,10 @@ class db{
      return true;
   }
 
+  public function update($data,$table_name,$where){
+    
+  }
+
   public function find_in($table_name,$key,$value){
     $results =  $this->conn->query("SELECT * FROM `{$table_name}` WHERE `{$key}` = '{$value}'") ;
      return $results->num_rows;

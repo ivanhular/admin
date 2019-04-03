@@ -14,7 +14,7 @@ class httpRequest extends module {
       // $this->db = $db;
       // $this->data = $data;
       parent::__construct();
-      $this->data = isset($_POST) ? $_POST : "";
+      $this->data = isset($_REQUEST) ? $_REQUEST : "";
       $this->tableName = isset($_REQUEST['table_name']) ? $_REQUEST['table_name'] : "";
 
   }
@@ -25,6 +25,8 @@ class httpRequest extends module {
 
         $this->response['message'] = $this->add_module($this->data);
 
+        $this->response['new_module_name'] = $this->set_new_module_count();
+
     }else{
 
         $this->response['message'] = 'Module Name Exist!';
@@ -33,6 +35,10 @@ class httpRequest extends module {
     }
 
     echo json_encode($this->response);
+
+  }
+
+  public function update_module(){
 
   }
 

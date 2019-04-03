@@ -201,6 +201,9 @@ $(function(){
 
                if(parseData.message =="Module Saved!"){
                   toastr.success(parseData.message);
+                  
+                  $('input[name=module_name]').val(parseData.new_module_name);
+
                 }else{
                   toastr.warning(parseData.message);
                   setTimeout(function(){

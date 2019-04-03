@@ -56,7 +56,12 @@ class module extends db{
       }
 
       if($result = $this->insert($data,$this->table_name))
-        echo "Module Saved!";
+        return "Module Saved!";
+  }
+
+
+  public function update_module(){
+
   }
 
   public function set_new_module_count(){
