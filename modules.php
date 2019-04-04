@@ -32,6 +32,11 @@ class module extends db{
     return $this->find_query("SELECT * from {$this->table_name}");
   }
 
+  public function get_module_by_id($name){
+    $result = $this->find_query("SELECT * FROM `{$this->table_name}` WHERE  `module_name` = '{$name}'");
+    return $result;
+  }
+
   public function module_exits($name){
       $result = $this->find_in($this->table_name , "module_name" , $name);
       if($result >= 1){
@@ -45,7 +50,8 @@ class module extends db{
         "application/x-httpd-php" => "php_code",
         "text/html"               => "html_code",
         "css"                     => "css_code",
-        "sass"                    => "sass_code"
+        "sass"                    => "sass_code",
+        "javascript"              => "javascript_code"
       );
 
       foreach ($data as $key => $value) {
@@ -55,29 +61,59 @@ class module extends db{
         }
       }
 
-      if($result = $this->insert($data,$this->table_name))
-        return "Module Saved!";
+      // var_dump($data);
+      if($result = $this->insert($data,$this->table_name)){
+        
+      }
+      //   return "Module Saved!";
+  }
+
+  public function update_module($data){
+      unset($data['action']);
+      $change_key = array(
+        "application/x-httpd-php" => "php_code",
+        "text/html"               => "html_code",
+        "css"                     => "css_code",
+        "sass"                    => "sass_code",
+        "javascript"              => "javascript_code"
+      );
+
+      foreach ($data as $key => $value) {
+        if(array_key_exists($key,$change_key)){
+            $data[$change_key[$key]] = $value;
+            unset($data[$key]);
+        }
+      }
+
+      if($result = $this->update($data,$this->table_name))
+        return "Module Updated!";
   }
 
 
-  public function update_module(){
 
-  }
 
   public function set_new_module_count(){
     $result = $this->find_query("SELECT `module_name` FROM `modules` ORDER BY `date_created` DESC LIMIT 1");
 
-    $pattern = '/(\d+)/m';
+    if($result){
 
-    $new_module_name = preg_replace_callback(
-      $pattern,
-      function($matches){
-          return (int)$matches[0][0] + 1;
-      },
-     $result[0]->module_name
-   );
+        $pattern = '/(\d+)/m';
 
-    return $new_module_name;
+        $new_module_name = preg_replace_callback(
+          $pattern,
+          function($matches){
+              return (int)$matches[0][0] + 1;
+          },
+         $result[0]->module_name
+       );
+
+        return $new_module_name;
+    }else{
+
+        return "module-1";
+    }
+
+
   }
 
   public function get_current_date(){

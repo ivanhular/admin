@@ -21,16 +21,42 @@ class db{
     $array_keys = implode(",",array_keys($data));
     $array_values = implode("', '",array_values($data));
 
-    $result = $this->conn->query("INSERT INTO {$table_name}({$array_keys}) values('{$array_values}')");
+    // $result = $this->conn->query("INSERT INTO {$table_name}({$array_keys}) values('{$array_values}')");
+    //
+    // $this->confirm_query($result);
+    //
+    //  return $result;
+    var_dump($data);
+  }
+
+  public function update($data,$table_name){
+
+    $len = count($data);
+
+    $key_count = 1;
+
+    $query = "UPDATE `{$table_name}` SET";
+
+      foreach ($data as $key => $value) {
+            if($key_count < $len){
+              $query .= " {$key}='{$value}',";
+            }else{
+              $query .= " {$key}='{$value} '";
+            }
+
+            $key_count++;
+      }
+
+    $query .="WHERE `module_name` = '{$data['module_name']}'";
+
+    $result = $this->conn->query($query);
 
     $this->confirm_query($result);
-     // var_dump("INSERT INTO {$table_name}({$array_keys}) values('{$array_values}')");
-     return true;
+
+     return $result;
+
   }
 
-  public function update($data,$table_name,$where){
-    
-  }
 
   public function find_in($table_name,$key,$value){
     $results =  $this->conn->query("SELECT * FROM `{$table_name}` WHERE `{$key}` = '{$value}'") ;

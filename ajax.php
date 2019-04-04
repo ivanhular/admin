@@ -21,25 +21,37 @@ class httpRequest extends module {
 
   public function insert_module(){
     // var_dump($this->data);
-    if( ! $this->module_exits($this->data['module_name'])){
+    // if( ! $this->module_exits($this->data['module_name'])){
+    //
+    //     $this->response['message'] = $this->add_module($this->data);
+    //
+    //     $this->response['new_module_name'] = $this->set_new_module_count();
+    //
+    // }else{
+    //
+    //     $this->response['message'] = 'Module Name Exist!';
+    //
+    //     $this->response['new_module_name'] = $this->set_new_module_count();
+    // }
+    //
+    // echo json_encode($this->response);
 
-        $this->response['message'] = $this->add_module($this->data);
-
-        $this->response['new_module_name'] = $this->set_new_module_count();
-
-    }else{
-
-        $this->response['message'] = 'Module Name Exist!';
-
-        $this->response['new_module_name'] = $this->set_new_module_count();
-    }
-
-    echo json_encode($this->response);
+    $this->add_module($this->data);
 
   }
 
-  public function update_module(){
+  public function edit_module(){
 
+    if($this->module_exits($this->data['module_name'])){
+
+        $this->response['message'] = $this->update_module($this->data);
+
+        // $this->response['new_module_name'] = $this->set_new_module_count();
+
+    }
+
+    // var_dump($this->module_exits($this->data['module_name']));
+    echo json_encode($this->response);
   }
 
   public function load_modules(){

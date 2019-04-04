@@ -2,6 +2,8 @@
   require_once('init.php');
 
   $new_mod_name = new module();
+
+  // var_dump($new_mod_name->set_new_module_count());
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,7 +24,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add Module</h1>
+            <h1><strong>Add module</strong></h1>
           </div>
 
         </div>

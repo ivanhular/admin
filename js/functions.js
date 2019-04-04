@@ -14,12 +14,15 @@ $(function(){
         ];
         this.glob ={};
         this.data ={};
+        this.code =[];
 
       this.initDataTables();
       // this.initLoadData();
-      // this.initUpdatebtn();
+      this.setCodeMirrorValue();
       this.initCodeMirror();
       this.initAddbtn();
+      this.initUpdatebtn();
+
     },
     // initCodeMirror:function () {
     //
@@ -72,13 +75,17 @@ $(function(){
     // },
     initCodeMirror:function () {
 
-      var modes = this.modes;
-      var glob = this.glob;
+      var modes = this.modes,
+          glob = {},
+          code = this.code;
+
+      console.log(code);
 
       $('textarea').each(function(index){
 
         var id = $(this).attr('id');
         var setMode ="";
+
          if(id != undefined){
            for (var i = 0; i <= modes.length -1; i++) {
                  //var regex = /modes[i]/g
@@ -87,6 +94,7 @@ $(function(){
                 }
            }
 
+          //init CodeMirror
            glob[id] = CodeMirror.fromTextArea(document.getElementById(id), {
              lineNumbers: true,
              //extraKeys: {"Ctrl-Space": "autocomplete"},
@@ -95,10 +103,34 @@ $(function(){
              indentWithTabs: true
            });
 
+           /* get Source Code From server  set source for CodeMirror*/
+            for (var i = 0; i < modes.length -1; i++) {
+              if(code[glob[id].options.mode]){ //check Mode
+                glob[id].setValue(code[glob[id].options.mode]); // Set value
+              }
+            }
+
          }
+
        });
 
+       /*Populate initialized each CodeMirror*/
        this.glob = glob;
+    },
+    setCodeMirrorValue:function(){
+        var _code = this.code ;
+
+        //Request Data from Server
+        jQuery.ajax({
+          data: 'get_code',
+          async:false,
+          success:function(data){
+                _code = JSON.parse(data);
+          },
+        });
+
+        //populate this.code
+        this.code = _code;
     },
     initDataTables:function () {
       $('#modules_table').DataTable({
@@ -114,7 +146,7 @@ $(function(){
                   // `data` option, which defaults to the column being worked with, in
                   // this case `data: 0`.
                   "render": function ( data, type, row ) {
-                      return "<a href=/edit.php?id="+ data +" class='btn btn-success' data-toggle='tooltip' title='Edit File'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a><a href=/edit.php?id="+ data +" data-toggle='tooltip' title='Delete File' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                      return "<a href=./edit.php?module_name="+ data +" class='btn btn-success' data-toggle='tooltip' title='Edit File'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a><a href=./edit.php?module_name="+ data +" data-toggle='tooltip' title='Delete File' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></a>";
                   },
                   "targets": 7
               },
@@ -142,7 +174,7 @@ $(function(){
           { "data": "description"},
           { "data": "tags"},
           { "data": "template_origin"},
-          { "data": "id"},
+          { "data": "module_name"},
 
 
         ],
@@ -181,6 +213,7 @@ $(function(){
 
          _this.data["action"] = "insert_module";
 
+        console.log(_this.data);
          jQuery.ajax({
              data: _this.data,
              type:'POST',
@@ -195,25 +228,28 @@ $(function(){
 
                 toastr.remove();
 
-                var parseData = JSON.parse(data);
+                // var parseData = JSON.parse(data);
 
-                console.log(parseData);
-
-               if(parseData.message =="Module Saved!"){
-                  toastr.success(parseData.message);
-                  
-                  $('input[name=module_name]').val(parseData.new_module_name);
-
-                }else{
-                  toastr.warning(parseData.message);
-                  setTimeout(function(){
-                    toastr.remove();
-                    toastr.info("System will automatically adjust Module Count");
-
-                    $('input[name=module_name]').val(parseData.new_module_name);
-
-                  },2000);
-                }
+                console.log(data);
+               //
+               // if(parseData.message =="Module Saved!"){
+               //    toastr.success(parseData.message);
+               //
+               //    $('input[name=module_name]').val(parseData.new_module_name);
+               //    setTimeout(function(){
+               //      window.location.reload();
+               //    },3000);
+               //
+               //  }else{
+               //    toastr.warning(parseData.message);
+               //    setTimeout(function(){
+               //      toastr.remove();
+               //      toastr.info("System will automatically adjust Module Count");
+               //
+               //      $('input[name=module_name]').val(parseData.new_module_name);
+               //
+               //    },2000);
+               //  }
               },
 
          });
@@ -222,36 +258,16 @@ $(function(){
     },
     initUpdatebtn:function () {
 
-      var data = {};
-      var glob ={};
-      var keys = Object.keys(glob);
-      var modes = [
-              "javascript",
-              "css",
-              "sass",
-              "application/x-httpd-php",
-              "text/html",
-        ];
+        var _this = this;
 
+       $('#update-btn').click(function(){
 
-      $('#update-btn').click(function(){
+         _this.getData();
 
-
-         for (var i = 0; i <= Object.keys(glob).length -1 ; i++) {
-
-               if(glob[keys[i]] != undefined){
-                 data[keys[i]] = glob[keys[i]].getValue();
-               }
-
-         }
-
-         data["theme"] = $('#input-theme').val();
-         data["type"] = $('#input-type').val();
-         data["action"] = "update";
-         data["id"] = code['id'];
+         _this.data["action"] = "edit_module";
 
          jQuery.ajax({
-             data: data,
+             data: _this.data,
              type:'POST',
              //dataType:'json',
              url:'ajax.php',
@@ -260,16 +276,31 @@ $(function(){
 
              },
              success: function(data){
-                 console.info(data);
 
-             },
-             complete:function(){
-                   toastr.remove();
-                   toastr.success('File Updated!');
-             }
+                toastr.remove();
+
+                var parseData = JSON.parse(data);
+
+                console.log(parseData.message);
+
+               if(parseData.message =="Module Updated!"){
+
+                  toastr.success(parseData.message);
+
+                }
+                // else{
+                //   toastr.warning(parseData.message);
+                //   setTimeout(function(){
+                //     toastr.remove();
+                //     toastr.info("System will automatically adjust Module Count");
+                //
+                //     $('input[name=module_name]').val(parseData.new_module_name);
+                //
+                //   },2000);
+                // }
+              },
 
          });
-
       });
 
     },
