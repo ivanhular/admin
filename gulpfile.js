@@ -1,15 +1,26 @@
 const { series, parallel, src , dest , watch} = require('gulp');
-const browserSync = require('browser-sync');
+const browserSync = require('browser-sync').create();
 const sass  = require('gulp-sass');
 
 // Static Server + watching scss/html files
 function serve(cb){
   browserSync.init({
-      proxy: "/admin2"
+      proxy: "/admin2",
+      files: ['/css'],
+      serveStatic: ['/css'],
+      rewriteRules:[
+        {
+          match: new RegExp('admin.css'),
+          fn: function() {
+              return `/css/admin.css`;
+          }
+        }
+      ]
   });
 
   watch("build/sass/*.scss", { events: 'change' } ,function(cb){
-    series(compile, browserSync.reload);
+    compile();
+    series(browserSync.reload);
     cb();
   });
 

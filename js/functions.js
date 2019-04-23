@@ -15,6 +15,7 @@ $(function(){
         this.glob ={};
         this.data ={};
         this.code =[];
+        this.dataTable = "";
 
       this.initDataTables();
       // this.initLoadData();
@@ -22,6 +23,7 @@ $(function(){
       this.initCodeMirror();
       this.initAddbtn();
       this.initUpdatebtn();
+      this.setCustomSearch();
 
     },
     // initCodeMirror:function () {
@@ -133,7 +135,7 @@ $(function(){
         this.code = _code;
     },
     initDataTables:function () {
-      $('#modules_table').DataTable({
+    this.dataTable = $('#modules_table').DataTable({
         processing: true,
         // serverSide: true,
         autoFill: true,
@@ -327,8 +329,15 @@ $(function(){
          data['Template_origin'] = $('input[name=Template_origin]').val();
 
          this.data = data;
-    }
-
+    },
+    setCustomSearch:function() {
+        // oTable = $('#myTable').DataTable();
+        //pay attention to capital D, which is mandatory to retrieve "api" datatables' object, as @Lionel said
+        var table = this.dataTable ;
+            $('#search-box').keyup(function(){
+                  table.search($(this).val()).draw() ;
+            })
+        }
   }
   coreSettings.init();
 });

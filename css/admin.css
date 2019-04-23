@@ -1,4 +1,5 @@
-.test {
-  color: #fff;
-  background: #fff;
+#modules_table_filter {
+  display: none; }
+
+.navbar-nav.ml-auto {
   display: none; }
