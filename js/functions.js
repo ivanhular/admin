@@ -148,13 +148,19 @@ $(function(){
                   "render": function ( data, type, row ) {
                       return "<a href=./edit.php?module_name="+ data +" class='btn btn-success' data-toggle='tooltip' title='Edit File'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a><a href=./edit.php?module_name="+ data +" data-toggle='tooltip' title='Delete File' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></a>";
                   },
-                  "targets": 7
+                  "targets": 6
               },
               {
                   "render": function ( data, type, row ) {
-                      return "<a href=" + data +" data-lity><img src="+ data +"/></a>";
+                      return "<a href=" + data +" data-lity><img src="+ data +" width=200/></a>";
                   },
                   "targets": 0
+              },
+              {
+                  "render": function ( data, type, row ) {
+                      return "<a href=" + data +" target='_blank'>View Link</a>";
+                  },
+                  "targets": 2
               },
               // { "visible": false,  "targets": [ 3 ] }
         ],
@@ -169,7 +175,6 @@ $(function(){
         "columns": [
           { "data": "preview_image"},
           { "data": "module_name"},
-          { "data": "status"},
           { "data": "canvas_link"},
           { "data": "description"},
           { "data": "tags"},

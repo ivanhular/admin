@@ -63,7 +63,7 @@ class module extends db{
 
       // var_dump($data);
       if($result = $this->insert($data,$this->table_name)){
-        
+
       }
       //   return "Module Saved!";
   }
@@ -88,7 +88,6 @@ class module extends db{
       if($result = $this->update($data,$this->table_name))
         return "Module Updated!";
   }
-
 
 
 

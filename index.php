@@ -33,8 +33,22 @@
       </div><!-- /.container-fluid -->
     </section>
 
+
     <section class="content">
       <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-12 mb-3">
+              <div class="input-group input-group-lg">
+                <input id="search-box" type="text" class="form-control rounded" aria-label="Large" aria-describedby="inputGroup-sizing-sm"  placeholder="Search...">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </div>
+              </div>
+          </div>
+        </div>
+
+
         <div class="row">
           <div class="col-12">
             <!-- <div class="callout callout-info">
@@ -72,7 +86,6 @@
                   <tr>
                     <th scope="col">Preview Image</th>
                     <th scope="col">Module Name</th>
-                    <th scope="col">Status</th>
                     <th scope="col">Canvas Link</th>
                     <th scope="col">Description</th>
                     <th scope="col">Tag</th>
@@ -110,5 +123,6 @@
 <!-- ./wrapper -->
 
 <?php include_once(__DIR__."/includes/footer.php") ?>
+
 </body>
 </html>
