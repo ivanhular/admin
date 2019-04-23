@@ -167,7 +167,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="../tables/simple.html" class="nav-link">
+              <a href="./index.php" class="nav-link">
                 <i class="fa fa-circle-o nav-icon"></i>
                 <p>Search</p>
               </a>

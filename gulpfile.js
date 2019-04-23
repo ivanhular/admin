@@ -5,7 +5,7 @@ const sass  = require('gulp-sass');
 // Static Server + watching scss/html files
 function serve(cb){
   browserSync.init({
-      proxy: "/admin2",
+      proxy: "/admin",
       files: ['/css'],
       serveStatic: ['/css'],
       rewriteRules:[

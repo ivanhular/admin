@@ -113,8 +113,7 @@
               </div>
             </form>
 
-            <button id="update-btn" type="button" class="btn btn-secondary">Save</button>
-
+            <button id="update-btn" type="button" class="btn btn-block btn-success btn-lg "><i class="fa fa-save"></i> Save</button>
         </div><!-- /.col -->
 
 

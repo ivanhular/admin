@@ -63,9 +63,8 @@ class module extends db{
 
       // var_dump($data);
       if($result = $this->insert($data,$this->table_name)){
-
+        return "Module Saved!";
       }
-      //   return "Module Saved!";
   }
 
   public function update_module($data){
@@ -95,13 +94,14 @@ class module extends db{
     $result = $this->find_query("SELECT `module_name` FROM `modules` ORDER BY `date_created` DESC LIMIT 1");
 
     if($result){
-
         $pattern = '/(\d+)/m';
 
         $new_module_name = preg_replace_callback(
           $pattern,
           function($matches){
-              return (int)$matches[0][0] + 1;
+              return (int)$matches[0] + 1;
+              // var_dump($matches);
+
           },
          $result[0]->module_name
        );

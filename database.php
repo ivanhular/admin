@@ -21,12 +21,12 @@ class db{
     $array_keys = implode(",",array_keys($data));
     $array_values = implode("', '",array_values($data));
 
-    // $result = $this->conn->query("INSERT INTO {$table_name}({$array_keys}) values('{$array_values}')");
-    //
-    // $this->confirm_query($result);
-    //
-    //  return $result;
-    var_dump($data);
+    $result = $this->conn->query("INSERT INTO {$table_name}({$array_keys}) values('{$array_values}')");
+
+    $this->confirm_query("INSERT INTO {$table_name}({$array_keys}) values('{$array_values}')");
+
+    // var_dump("INSERT INTO {$table_name}({$array_keys}) values('{$array_values}')");
+     return $result;
   }
 
   public function update($data,$table_name){
@@ -107,7 +107,13 @@ class db{
 
 }
 
-
+// public function bulk(){
+//   for ($i=4; $i <= 100 ; $i++) {
+//
+//     $this->conn->query("INSERT INTO {$table_name}({$array_keys}) values('{$array_values}')");
+//
+//   }
+// }
 
 //$db = new db();
 

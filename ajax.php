@@ -21,22 +21,21 @@ class httpRequest extends module {
 
   public function insert_module(){
     // var_dump($this->data);
-    // if( ! $this->module_exits($this->data['module_name'])){
-    //
-    //     $this->response['message'] = $this->add_module($this->data);
-    //
-    //     $this->response['new_module_name'] = $this->set_new_module_count();
-    //
-    // }else{
-    //
-    //     $this->response['message'] = 'Module Name Exist!';
-    //
-    //     $this->response['new_module_name'] = $this->set_new_module_count();
-    // }
-    //
-    // echo json_encode($this->response);
+    if( ! $this->module_exits($this->data['module_name'])){
 
-    $this->add_module($this->data);
+        $this->response['message'] = $this->add_module($this->data);
+
+        $this->response['new_module_name'] = $this->set_new_module_count();
+
+    }else{
+
+        $this->response['message'] = 'Module Name Exist!';
+
+        $this->response['new_module_name'] = $this->set_new_module_count();
+    }
+
+    echo json_encode($this->response);
+
 
   }
 

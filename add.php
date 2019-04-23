@@ -40,6 +40,7 @@
             <form>
               <div class="form-group">
                 <label for="input-type">Module Name</label>
+
                 <input type="text" class="w-100 form-control" name="module_name" value="<?php echo $new_mod_name->set_new_module_count(); ?>" disabled>
               </div>
 
@@ -95,7 +96,7 @@
               </div>
             </form>
 
-            <button id="add-btn" type="button" class="btn btn-secondary">Save</button>
+            <button id="add-btn" type="button" class="btn btn-block btn-success btn-lg "><i class="fa fa-save"></i> Save</button>
 
         </div><!-- /.col -->
 

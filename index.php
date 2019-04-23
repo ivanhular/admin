@@ -21,7 +21,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Module Search</h1>
+            <h1>Module Search</h4>
           </div>
           <!-- <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -35,15 +35,14 @@
 
 
     <section class="content">
+
       <div class="container-fluid">
 
         <div class="row">
           <div class="col-12 mb-3">
               <div class="input-group input-group-lg">
-                <input id="search-box" type="text" class="form-control rounded" aria-label="Large" aria-describedby="inputGroup-sizing-sm"  placeholder="Search...">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
-                </div>
+                <input id="search-box" type="text" class="form-control rounded" aria-label="Large" aria-describedby="inputGroup-sizing-sm"  placeholder="Enter search Keyword">
+
               </div>
           </div>
         </div>
@@ -81,6 +80,9 @@
 
 
           <div class="invoice p-3 mb-3">
+            <a class="btn btn-success float-right text-light" href="add.php">
+                      <i class="fa fa-plus" aria-hidden="true"></i> Add Module
+            </a>
             <table id="modules_table" class="table table-striped table-bordered" style="width:100%">
               <thead>
                   <tr>
@@ -90,12 +92,11 @@
                     <th scope="col">Description</th>
                     <th scope="col">Tag</th>
                     <th scope="col">Template Origin</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Actions</th>
                   </tr>
               </thead>
             </table>
 
-            <a href="add.php" type="button" class="btn btn-secondary">Add New</a>
 
         </div><!-- /.col -->
 

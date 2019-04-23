@@ -15,7 +15,6 @@ $(function(){
         this.glob ={};
         this.data ={};
         this.code =[];
-        this.dataTable = "";
 
       this.initDataTables();
       // this.initLoadData();
@@ -24,7 +23,6 @@ $(function(){
       this.initAddbtn();
       this.initUpdatebtn();
       this.setCustomSearch();
-
     },
     // initCodeMirror:function () {
     //
@@ -135,59 +133,84 @@ $(function(){
         this.code = _code;
     },
     initDataTables:function () {
-    this.dataTable = $('#modules_table').DataTable({
-        processing: true,
-        // serverSide: true,
-        autoFill: true,
-        paging: true,
-        pageLength: 10,
-        order: [[ 1, "asc" ]],
-        "columnDefs": [
-              {
-                  // The `data` parameter refers to the data for the cell (defined by the
-                  // `data` option, which defaults to the column being worked with, in
-                  // this case `data: 0`.
-                  "render": function ( data, type, row ) {
-                      return "<a href=./edit.php?module_name="+ data +" class='btn btn-success' data-toggle='tooltip' title='Edit File'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a><a href=./edit.php?module_name="+ data +" data-toggle='tooltip' title='Delete File' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></a>";
-                  },
-                  "targets": 6
-              },
-              {
-                  "render": function ( data, type, row ) {
-                      return "<a href=" + data +" data-lity><img src="+ data +" width=200/></a>";
-                  },
-                  "targets": 0
-              },
-              {
-                  "render": function ( data, type, row ) {
-                      return "<a href=" + data +" target='_blank'>View Link</a>";
-                  },
-                  "targets": 2
-              },
-              // { "visible": false,  "targets": [ 3 ] }
-        ],
-        ajax:{
-          data:{action:'load_modules'},
-          url:"ajax.php",
-          dataSrc:"",
-          type:'POST',
+      this.dataTable = $('#modules_table').DataTable({
+          processing: true,
+          // serverSide: true,
+          autoFill: true,
+          paging: true,
+          pageLength: 10,
+          order: [[ 1, "asc" ]],
+          "columnDefs": [
+                {
+                    // The `data` parameter refers to the data for the cell (defined by the
+                    // `data` option, which defaults to the column being worked with, in
+                    // this case `data: 0`.
+                    "render": function ( data, type, row ) {
+                        return "<a href=./edit.php?module_name="+ data +" class='btn btn-success' data-toggle='tooltip' title='Edit File'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a><a href=./edit.php?module_name="+ data +" data-toggle='tooltip' title='Delete File' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                    },
+                    "targets": 6
+                },
+                {
+                    "render": function ( data, type, row ) {
+                        return "<a href=" + data +" data-lity><img src="+ data +" width=200/></a>";
+                    },
+                    "targets": 0
+                },
+                {
+                  type: 'natural', targets: 1
+                },
+                {
+                    "render": function ( data, type, row ) {
+                        return "<a href=" + data +" target='_blank'>View Link</a>";
+                    },
+                    "targets": 2
+                },
+                // { "visible": false,  "targets": [ 3 ] }
+          ],
+          ajax:{
+            data:{action:'load_modules'},
+            url:"ajax.php",
+            dataSrc:"",
+            type:'POST',
 
-          // dataType:'jsonp'
-         } ,
-        "columns": [
-          { "data": "preview_image"},
-          { "data": "module_name"},
-          { "data": "canvas_link"},
-          { "data": "description"},
-          { "data": "tags"},
-          { "data": "template_origin"},
-          { "data": "module_name"},
+            // dataType:'jsonp'
+           } ,
+          "columns": [
+            { "data": "preview_image"},
+            { "data": "module_name"},
+            { "data": "canvas_link"},
+            { "data": "description"},
+            { "data": "tags"},
+            { "data": "template_origin"},
+            { "data": "module_name"},
 
 
-        ],
+          ],
+
+          });
+      },
+    initLoadData:function() {
+          jQuery.ajax({
+              data: {action:'load', table_name:'modules'},
+              type:'POST',
+              //dataType:'json',
+              url:'ajax.php',
+              beforeSend:function(){
+
+                 toastr.info('Loading...');
+
+              },
+              success: function(data){
+                  // console.info(JSON.parse(data));
+                  console.log(data);
+
+              },
+              complete:function(){
+                    toastr.success('Data Loaded!');
+              }
 
         });
-    },
+      },
     initLoadData:function() {
         jQuery.ajax({
             data: {action:'load', table_name:'modules'},
@@ -220,7 +243,8 @@ $(function(){
 
          _this.data["action"] = "insert_module";
 
-        console.log(_this.data);
+        // console.log(_this.data);
+
          jQuery.ajax({
              data: _this.data,
              type:'POST',
@@ -235,28 +259,28 @@ $(function(){
 
                 toastr.remove();
 
-                // var parseData = JSON.parse(data);
+                var parseData = JSON.parse(data);
 
-                console.log(data);
-               //
-               // if(parseData.message =="Module Saved!"){
-               //    toastr.success(parseData.message);
-               //
-               //    $('input[name=module_name]').val(parseData.new_module_name);
-               //    setTimeout(function(){
-               //      window.location.reload();
-               //    },3000);
-               //
-               //  }else{
-               //    toastr.warning(parseData.message);
-               //    setTimeout(function(){
-               //      toastr.remove();
-               //      toastr.info("System will automatically adjust Module Count");
-               //
-               //      $('input[name=module_name]').val(parseData.new_module_name);
-               //
-               //    },2000);
-               //  }
+                // console.log(data);
+
+               if(parseData.message =="Module Saved!"){
+                  toastr.success(parseData.message);
+
+                  $('input[name=module_name]').val(parseData.new_module_name);
+                  setTimeout(function(){
+                    // window.location.reload();
+                  },3000);
+
+                }else{
+                  toastr.warning(parseData.message);
+                  setTimeout(function(){
+                    toastr.remove();
+                    toastr.info("System will automatically adjust Module Count");
+
+                    $('input[name=module_name]').val(parseData.new_module_name);
+
+                  },2000);
+                }
               },
 
          });
@@ -337,7 +361,8 @@ $(function(){
             $('#search-box').keyup(function(){
                   table.search($(this).val()).draw() ;
             })
-        }
+    }
+
   }
   coreSettings.init();
 });
