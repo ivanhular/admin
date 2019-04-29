@@ -146,13 +146,13 @@ $(function(){
                     // `data` option, which defaults to the column being worked with, in
                     // this case `data: 0`.
                     "render": function ( data, type, row ) {
-                        return "<a href=./edit.php?module_name="+ data +" class='btn btn-success' data-toggle='tooltip' title='Edit File'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a><a href=./edit.php?module_name="+ data +" data-toggle='tooltip' title='Delete File' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></a>";
+                        return "<a href=./edit.php?module_name="+ data +" class='btn btn-success' data-toggle='tooltip' title='Edit File'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></a>";
                     },
                     "targets": 6
                 },
                 {
                     "render": function ( data, type, row ) {
-                        return "<a href=" + data +" data-lity><img src="+ data +" width=200/></a>";
+                        return "<a href=" + data +" data-lity><img src="+ data +" width=500/></a>";
                     },
                     "targets": 0
                 },
@@ -361,6 +361,9 @@ $(function(){
             $('#search-box').keyup(function(){
                   table.search($(this).val()).draw() ;
             })
+    },
+    get_user_detail:function() {
+
     }
 
   }

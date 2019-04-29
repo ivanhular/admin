@@ -40,7 +40,8 @@
 
         <div class="row">
           <div class="col-12 mb-3">
-              <div class="input-group input-group-lg">
+              <div class="input-group input-group-lg search-box-wrap">
+                <i class="fa fa-search" aria-hidden="true"></i>
                 <input id="search-box" type="text" class="form-control rounded" aria-label="Large" aria-describedby="inputGroup-sizing-sm"  placeholder="Enter search Keyword">
 
               </div>

@@ -73,7 +73,7 @@
 
               <div class="form-group">
                 <label for="input-type">Preview Image</label>
-                <input type="text" value="<?=  $module[0]->template_origin; ?>" class="w-100 form-control" name="preview_image" >
+                <input type="text" value="<?=  $module[0]->preview_image; ?>" class="w-100 form-control" name="preview_image" >
               </div>
 
               <div class="form-group">

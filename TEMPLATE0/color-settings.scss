@@ -1,0 +1,179 @@
+/************************************************
+  SET COLOR SCHEME FROM MOCKUP OR REQUESTED COLORS
+*************************************************/
+$primary-color: #763131;
+$secondary-color: #272727;
+$tertiary-color: #333333;
+
+$gray: #666666;
+$w:#fff;
+$b:#000;
+
+
+/**********************************************
+  COLOR SETTINGS DECLARATION
+  NOTE: This class is used for extension
+  e.g @extend .primary-c;
+***********************************************/
+.primary-bg{
+  background: $primary-color;
+}
+.primary-bga {
+    background: rgba($primary-color, 0.8);
+}
+.primary-c{
+  color: $primary-color;
+}
+.secondary-bg{
+  background: $secondary-color;
+}
+.secondary-bga {
+    background: rgba($secondary-color, 0.8);
+}
+.secondary-c{
+  color: $secondary-color;
+}
+.tertiary-bg{
+  background: $tertiary-color;
+}
+.tertiary-bga {
+    background: rgba($tertiary-color, 0.8);
+}
+.tertiary-c{
+  color: $tertiary-color;
+}
+.gray{
+  color:$gray;
+}
+.gray-bg{
+  background:$gray;
+}
+/**********************************************
+  STATIC COLOR DECLARATION
+  NOTE: This Place holders is used as a static
+  colors that we can use to modify the default
+  classes. You can Also ignore it!
+***********************************************/
+%text-color{
+  color:$gray;
+}
+//Color for Mobile Button
+%nav-bg{
+    background: transparent;
+}
+// Mobile Color Settings
+%mobile-header-icon-bg{
+    @extend .primary-bg;
+}
+%mobile-container-bg{
+    @extend .white-bg;
+}
+%hamburger-inner-color{
+  @extend .secondary-bg;
+}
+%hamburger-amp-color{
+  @extend .secondary-c;
+}
+// Button Color Settings
+//primary
+%btn-primary-bg{
+  @extend .primary-bg;
+}
+%btn-primary-c{
+  @extend .white-c;
+}
+%btn-primary-after-c{
+  @extend .white-c;
+}
+%btn-primary-hover-c{
+  @extend .white-c;
+}
+//secondary
+%btn-secondary-bg{
+  @if($cs == "1"){
+    @extend .white-bg;
+  }@else{
+    @extend .secondary-bg;
+  }
+}
+%btn-secondary-c{
+  @extend .primary-c;
+}
+%btn-secondary-after-c{
+  @extend .white-c;
+}
+%btn-secondary-hover-c{
+  @extend .white-c;
+}
+// Accordion
+%accordion-c{
+  @extend .primary-c;
+}
+// Pagination
+%pagination-bg {
+    @extend .primary-bg;
+}
+%pagination-bg-hover {
+    @extend .secondary-bg;
+}
+%pagination-c {
+    @extend .white-c;
+}
+//modal
+%modal-txt-bg{
+  background: rgba($primary-color,.1);
+}
+//Static colors
+.white-c{
+  @extend %white-c;
+}
+.white-bg{
+  @extend %white-bg;
+}
+.white-bga{
+  @extend %white-bga;
+}
+.black-c{
+  @extend %black-c;
+}
+.black-bg{
+  @extend %black-bg;
+}
+.black-bga{
+  @extend %black-bga;
+}
+%white-c{
+  color:$w;
+}
+%white-bg{
+  background:$w;
+}
+%white-bga{
+  background:rgba($w, .8);
+}
+%black-c{
+  color:$b;
+}
+%black-bg{
+  background:$b;
+}
+%black-bga{
+  background:rgba($b, .8);
+}
+
+
+/**********************************************
+  HOMEPAGE SECTIONS COLOR SETTINGS
+***********************************************/
+
+
+
+/**********************************************
+  INSIDE PAGE COLOR SETTINGS
+***********************************************/
+
+
+
+/**********************************************
+  AMP COLOR SETTINGS
+***********************************************/

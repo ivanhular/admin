@@ -1,0 +1,340 @@
+/*splitfilename=default.css*/
+/*----------------------------------
+THEME NAME: BASE SITE TEMPLATE
+----------------------------------*/
+@import 'mixins';
+/* ------- START DEFAULT.CSS ------- */
+@import 'default_v2';
+/* ----- END DEFAULT ----- */
+/*split*/
+
+/*splitfilename=color-scheme.css*/
+/* ------- START COLOR-SCHEME ------- */
+$cs:"1"; //Set Active Color Scheme
+//Declare color scheme from Mockup Get All existing color
+@import 'color-settings';
+/* ------- END COLOR-SCHEME ------- */
+/*split*/
+
+/*splitfilename=site.css*/
+
+/* ------- START SITE.CSS -------*/
+
+//Place Font Declarations
+%primary-font{
+  font-family: 'Questrial', sans-serif !important;
+}
+%secondary-font{
+  font-family: 'Playfair Display', serif !important;
+}
+
+%fas{
+  font-family: "Font Awesome 5 Free" !important;
+  font-weight: 900;
+}
+%fab{
+  font-family: "Font Awesome 5 Brands" !important;
+}
+%fa{
+  font-family: "fontawesome" !important;
+}
+
+//Place Predefined Place Holders
+//Note: You can define your own Repetetive properties Here
+
+%flex-row {
+  display: flex;
+  justify-content: space-between;
+}
+%ry-heading{
+  @include font-size(30px,55px,320px,1600px);
+  @extend %secondary-font;
+  font-weight: 700;
+  margin-bottom: 50px;
+  line-height: 65px;
+  @include max(991px){
+    text-align: center;
+    line-height: normal;
+  }
+}
+%ry-sub-heading{
+  @include font-size(16px,20px,320px,1600px);
+  &:after{
+    content:"";
+    width: 50px;
+    height: 3px;
+    display: block;
+    @extend .primary-bg;
+  }
+}
+%ry-text{
+  @include font-size(16px,20px,500px,1440px);
+  text-align: justify;
+  line-height: 30px;
+  @include max(991px){
+    text-align-last: center;
+  }
+}
+
+%section-md {
+  @include section-contain(1300px,1440px,90%);
+}
+%section {
+  @include section-contain(1600px,1700px,90%);
+}
+%section-sm{
+  @include section-contain(1300px,1440px,80%);
+}
+
+
+//Place global Overides For default.css
+
+body{
+  @extend %primary-font;
+  @extend %text-color;
+
+  &.home{
+  }
+  &.default{
+  }
+
+
+}
+
+.ry-btn{
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  position:relative;
+  perspective:800px;
+  @extend .white-c;
+  @extend %primary-font;
+  @include font-size(16px,20px,500px,1440px);
+  border-radius: 35px;
+  text-transform: uppercase;
+  z-index: 10;
+  padding: 14px 40px;
+  letter-spacing: 3px;
+  @include max(767px) {
+    letter-spacing: 1px;
+    padding: 14px 30px;
+  }
+  @include max(500px) {
+    padding: 14px 20px;
+  }
+  &:before {
+	    content: '';
+	    width:100%;
+	    height: 100%;
+	    @extend .secondary-bg;
+	    position:absolute;
+	    top:0;
+	    left:0;
+	    z-index: -1;
+	    border-radius: 40px;
+	    transform:rotateX(-90deg) scale(1);
+	    transform-origin: bottom;
+	    transition:transform cubic-bezier(.19,1,.22,1) 0.7s;
+	  }
+
+	  &:hover {
+	    &:before {
+	      transform:rotateX(-20deg) scale(1);
+	    }
+	  }
+  &.ry-btn-primary{
+    @extend %btn-primary-bg;
+    @extend %btn-primary-c;
+    letter-spacing: 3px;
+    &:hover{
+      @extend %btn-primary-bg;
+      box-shadow: 0 3px 20px rgba(0, 0, 0, .1);
+    }
+    &:before{
+      @extend %btn-primary-after-c;
+    }
+    &:after{
+      @extend %btn-primary-after-c;
+      @extend %btn-primary-c;
+    }
+  }
+  &.ry-btn-secondary{
+    @extend %btn-secondary-bg !optional;
+    @extend %btn-secondary-c !optional;
+    letter-spacing: 3px;
+    &:hover{
+      @extend .primary-bg;
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+    }
+    &:before{
+      @extend %btn-secondary-before-bg !optional;
+    }
+    &:after{
+      @extend %btn-secondary-after-bg !optional;
+    }
+  }
+}
+.ry-social {
+  .social-inner-wrap {
+    li {
+      &:hover {
+        transform:unset;
+        a{
+          &:before, i {
+            transform:rotateY(-360deg)
+          }
+        }
+      }
+      a {
+        &:before, i {
+          transition:all ease 0.9s;
+          transform: rotateY(0deg);
+        }
+      }
+    }
+
+  }
+}
+.ry-form{
+  &.ry-form-box{
+    background-color: #fff;
+    padding: 60px 7% 45px;
+    margin: 10px 0 80px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0;
+    box-shadow: none;
+    &:after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        display: block;
+        width: 100%;
+        height: 50px;
+        background-image: url(https://s3.amazonaws.com/static.organiclead.com/Site-31d61482-8c99-49ba-aa86-d48519073e8c/svp_contact_shadow.png);
+        background-position: center;
+        background-size: cover;
+        opacity: 0.2;
+    }
+  }
+
+  input[type="text"]{
+      border: solid 1px #ddd !important;
+  }
+  textarea{
+      border: solid 1px #ddd !important;
+  }
+
+}
+.ry-search{
+  margin-bottom: 50px;
+  input{
+    border-radius: 40px !important;
+    padding-left: 20px;
+    @include placeHolder{
+      font-size: 18px;
+    }
+  }
+  button{
+    &.btn-primary{
+      border-top-right-radius: 40px !important;
+      border-bottom-right-radius: 40px !important;
+      background: none !important;
+      font-size: 1.1rem;
+      width: 100px !important;
+      @extend .gray;
+    }
+
+  }
+}
+.ry-menu{
+  .ry-nav{
+    li.dropdown{
+      .dropdown-menu{
+        &.hover{
+          top:80px;
+        }
+      }
+      .dropdown-toggle{
+        span{
+          display: block;
+          margin-left: 15px;
+        }
+      }
+    }
+  }
+}
+
+#ry-pg-body{
+  .ry-content{
+    @include max(991px){
+      align-items: center;
+    }
+  }
+  .ry-left{
+    width: 65%;
+    @include between(992px,1200px){
+      width: 60%;
+    }
+    @include max(991px){
+      width: 100%;
+    }
+    .module-4{
+      .ry-each{
+        a{
+          @extend .white-c;
+        }
+      }
+    }
+    .ry-tabs{
+      .nav-tabs{
+        li{
+          &.active{
+            a{
+              @extend .white-c;
+            }
+          }
+        }
+      }
+    }
+  }
+  .ry-right{
+    width: 25%;
+    @include between(992px,1200px){
+      width: 30%;
+    }
+    @include max(991px){
+      width: 100%;
+      max-width: 350px;
+    }
+  }
+}
+#ry-pg-banner{
+  .ry-bnr-wrp{
+    height: 460px;
+    &:before{
+      content: "";
+      @extend .white-bg;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      opacity: .1;
+      left: 0;
+      top: 0;
+      z-index: 2;
+    }
+  }
+}
+#ry-sidebar{}
+
+//----------------------------------
+
+//Place Used MODULES
+/* ---- MODULES ----*/
+
+// Add Sections css Structure
+//Note:This contain all section Styling
+
+/* ------- END SITE.CSS -------*/
+/*split*/
