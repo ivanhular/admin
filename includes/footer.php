@@ -9,8 +9,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="./dist/js/demo.js"></script>
 
-<script type="text/javascript" src="./node_modules/toastr/toastr.js"></script>
-<script type="text/javascript" src="./node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.js"></script>
+<script type="text/javascript" src="./plugins/toastr/toastr.js"></script>
+<script type="text/javascript" src="./plugins/@fancyapps/fancybox/dist/jquery.fancybox.min.js"></script>
 <script type="text/javascript" src="./plugins/CodeMirror-master/lib/codemirror.js"></script>
 <script type="text/javascript" src="./plugins/CodeMirror-master/mode/javascript/javascript.js"></script>
 <script type="text/javascript" src="./plugins/CodeMirror-master/mode/css/css.js"></script>
