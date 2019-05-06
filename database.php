@@ -16,16 +16,21 @@ class db{
     }
   }
 
+  public function escape_char($str){
+    return $this->conn->real_escape_string($str);
+  }
+
   public function insert($data,$table_name){
 
     $array_keys = implode(",",array_keys($data));
-    $array_values = implode("', '",array_values($data));
+    $array_values =implode("', '",array_values($data));
 
     $result = $this->conn->query("INSERT INTO {$table_name}({$array_keys}) values('{$array_values}')");
 
     $this->confirm_query("INSERT INTO {$table_name}({$array_keys}) values('{$array_values}')");
 
-    // var_dump("INSERT INTO {$table_name}({$array_keys}) values('{$array_values}')");
+    // var_dump( "INSERT INTO {$table_name}({$array_keys}) values('{$array_values}')" );
+
      return $result;
   }
 
@@ -38,22 +43,23 @@ class db{
     $query = "UPDATE `{$table_name}` SET";
 
       foreach ($data as $key => $value) {
+        $value = $this->conn->real_escape_string($value);
             if($key_count < $len){
               $query .= " {$key}='{$value}',";
             }else{
               $query .= " {$key}='{$value} '";
             }
-
             $key_count++;
       }
 
     $query .="WHERE `module_name` = '{$data['module_name']}'";
 
-    $result = $this->conn->query($query);
+   $result = $this->conn->query($query);
 
-    $this->confirm_query($result);
+   $this->confirm_query($result);
 
-     return $result;
+   return $result;
+   // var_dump($query);
 
   }
 

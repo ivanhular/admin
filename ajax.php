@@ -1,6 +1,7 @@
 <?php
   require_once('init.php');
 
+
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : "";
 
 
@@ -31,15 +32,17 @@ class httpRequest extends module {
 
         $this->response['message'] = 'Module Name Exist!';
 
-        $this->response['new_module_name'] = $this->set_new_module_count();
+       $this->response['new_module_name'] = $this->set_new_module_count();
     }
 
-    echo json_encode($this->response);
+   echo json_encode($this->response);
 
 
   }
 
   public function edit_module(){
+
+    //var_dump($this->data);
 
     if($this->module_exits($this->data['module_name'])){
 

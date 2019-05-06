@@ -56,8 +56,10 @@ class module extends db{
 
       foreach ($data as $key => $value) {
         if(array_key_exists($key,$change_key)){
-            $data[$change_key[$key]] = $value;
+            $data[$change_key[$key]] = $this->escape_char($value);
             unset($data[$key]);
+        }else{
+            $data[$key] = $this->escape_char($value);
         }
       }
 
@@ -83,6 +85,7 @@ class module extends db{
             unset($data[$key]);
         }
       }
+
 
       if($result = $this->update($data,$this->table_name))
         return "Module Updated!";

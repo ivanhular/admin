@@ -152,7 +152,9 @@ $(function(){
                 },
                 {
                     "render": function ( data, type, row ) {
-                        return "<a href=" + data +" data-lity><img src="+ data +" width=500/></a>";
+                        var dataSrc = (data == null || data == "") ?  "https://via.placeholder.com/1920x500?text=Image+place+Holder+1920+x+500" : data;
+                        console.log(data);
+                        return "<a href=" + dataSrc +" data-lity><img src="+ dataSrc +" width='500'/></a>";
                     },
                     "targets": 0
                 },
@@ -298,7 +300,7 @@ $(function(){
          _this.data["action"] = "edit_module";
 
          jQuery.ajax({
-             data: _this.data,
+             data:_this.data,
              type:'POST',
              //dataType:'json',
              url:'ajax.php',
@@ -312,7 +314,6 @@ $(function(){
 
                 var parseData = JSON.parse(data);
 
-                console.log(parseData.message);
 
                if(parseData.message =="Module Updated!"){
 
